@@ -4,7 +4,18 @@ const router = express.Router();
 const { getDB } = require("../db/connect");
 const { ObjectId } = require("mongodb");
 
-// GET all stories
+/**
+ * @swagger
+ * /stories:
+ *   get:
+ *     summary: Get all stories
+ *     description: Returns all stories stored in the Story Vault database.
+ *     responses:
+ *       200:
+ *         description: List of stories
+ *       500:
+ *         description: Server error
+ */
 router.get("/", async (req, res) => {
   try {
     const db = getDB();
@@ -24,7 +35,25 @@ router.get("/", async (req, res) => {
 });
 
 
-// GET one story by ID
+/**
+ * @swagger
+ * /stories/{id}:
+ *   get:
+ *     summary: Get a story by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Story found
+ *       404:
+ *         description: Story not found
+ *       500:
+ *         description: Server error
+ */
 router.get("/:id", async (req, res) => {
   try {
     const db = getDB();
