@@ -1,0 +1,48 @@
+### Create Story
+POST http://localhost:3000/stories
+Content-Type: application/json
+
+{
+  "title": "The Forgotten Realm",
+  "genre": "Fantasy",
+  "status": "Planning",
+  "summary": "A lost kingdom returns after centuries hidden from the world.",
+  "wordCount": 5000,
+  "targetAudience": "Young Adult",
+  "dateCreated": "2026-07-18",
+  "favorite": false
+}
+
+### Update Story
+PUT http://localhost:3000/stories/6a5b9f5fb901cd8081ec28da
+Content-Type: application/json
+
+{
+  "title": "The Forgotten Realm",
+  "genre": "Epic Fantasy",
+  "status": "Draft",
+  "summary": "A lost kingdom returns after centuries hidden from the world.",
+  "wordCount": 9000,
+  "targetAudience": "Young Adult",
+  "dateCreated": "2026-07-18",
+  "favorite": true
+}
+
+### Delete Story
+DELETE http://localhost:3000/stories/YOUR_ID_HERE
+
+###post story
+POST http://localhost:3000/stories
+Content-Type: application/json
+
+{
+  "title": "Missing Fields Test"
+}
+
+###post ideas
+POST http://localhost:3000/ideas
+Content-Type: application/json
+
+{
+  "title": "Missing Fields Test"
+}
