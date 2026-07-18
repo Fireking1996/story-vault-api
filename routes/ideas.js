@@ -5,7 +5,18 @@ const { getDB } = require("../db/connect");
 const { ObjectId } = require("mongodb");
 
 
-// GET all ideas
+/**
+ * @swagger
+ * /ideas:
+ *   get:
+ *     summary: Get all ideas
+ *     description: Returns all writing ideas stored in the database.
+ *     responses:
+ *       200:
+ *         description: List of ideas
+ *       500:
+ *         description: Server error
+ */
 router.get("/", async (req, res) => {
   try {
     const db = getDB();
@@ -25,7 +36,25 @@ router.get("/", async (req, res) => {
 });
 
 
-// GET one idea by ID
+/**
+ * @swagger
+ * /ideas/{id}:
+ *   get:
+ *     summary: Get an idea by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Idea found
+ *       404:
+ *         description: Idea not found
+ *       500:
+ *         description: Server error
+ */
 router.get("/:id", async (req, res) => {
   try {
     const db = getDB();
@@ -52,7 +81,39 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// POST create idea
+/**
+ * @swagger
+ * /ideas:
+ *   post:
+ *     summary: Create a new idea
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - category
+ *               - description
+ *               - priority
+ *             properties:
+ *               title:
+ *                 type: string
+ *               category:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               priority:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Idea created
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 router.post("/", async (req, res) => {
   try {
     const db = getDB();
@@ -95,7 +156,31 @@ router.post("/", async (req, res) => {
 });
 
 
-// PUT update idea
+/**
+ * @swagger
+ * /ideas/{id}:
+ *   put:
+ *     summary: Update an idea
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: Idea updated
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 router.put("/:id", async (req, res) => {
   try {
     const db = getDB();
@@ -140,7 +225,23 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// DELETE idea
+/**
+ * @swagger
+ * /ideas/{id}:
+ *   delete:
+ *     summary: Delete an idea
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Idea deleted
+ *       500:
+ *         description: Server error
+ */
 router.delete("/:id", async (req, res) => {
   try {
     const db = getDB();

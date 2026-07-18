@@ -80,7 +80,50 @@ router.get("/:id", async (req, res) => {
 });
 
 
-// POST create story
+/**
+ * @swagger
+ * /stories:
+ *   post:
+ *     summary: Create a new story
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - genre
+ *               - status
+ *               - summary
+ *               - wordCount
+ *               - targetAudience
+ *               - dateCreated
+ *             properties:
+ *               title:
+ *                 type: string
+ *               genre:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *               summary:
+ *                 type: string
+ *               wordCount:
+ *                 type: integer
+ *               targetAudience:
+ *                 type: string
+ *               dateCreated:
+ *                 type: string
+ *               favorite:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Story created
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 router.post("/", async (req, res) => {
   try {
     const db = getDB();
@@ -131,7 +174,31 @@ router.post("/", async (req, res) => {
 });
 
 
-// PUT update story
+/**
+ * @swagger
+ * /stories/{id}:
+ *   put:
+ *     summary: Update a story
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: Story updated
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 router.put("/:id", async (req, res) => {
   try {
     const db = getDB();
@@ -183,7 +250,23 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// DELETE story
+/**
+ * @swagger
+ * /stories/{id}:
+ *   delete:
+ *     summary: Delete a story
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Story deleted
+ *       500:
+ *         description: Server error
+ */
 router.delete("/:id", async (req, res) => {
   try {
     const db = getDB();
