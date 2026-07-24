@@ -3,6 +3,7 @@ const router = express.Router();
 
 const { getDB } = require("../db/connect");
 const { ObjectId } = require("mongodb");
+const isAuthenticated = require("../middleware/auth");
 
 /**
  * @swagger
@@ -84,6 +85,8 @@ router.get("/:id", async (req, res) => {
  * @swagger
  * /stories:
  *   post:
+ *     security:
+ *       - cookieAuth: []
  *     summary: Create a new story
  *     requestBody:
  *       required: true
@@ -124,7 +127,7 @@ router.get("/:id", async (req, res) => {
  *       500:
  *         description: Server error
  */
-router.post("/", async (req, res) => {
+router.post("/", isAuthenticated, async (req, res) => {
   try {
     const db = getDB();
 
@@ -178,6 +181,8 @@ router.post("/", async (req, res) => {
  * @swagger
  * /stories/{id}:
  *   put:
+ *     security:
+ *        - cookieAuth: []
  *     summary: Update a story
  *     parameters:
  *       - in: path
@@ -199,7 +204,7 @@ router.post("/", async (req, res) => {
  *       500:
  *         description: Server error
  */
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAuthenticated, async (req, res) => {
   try {
     const db = getDB();
 
@@ -254,6 +259,8 @@ router.put("/:id", async (req, res) => {
  * @swagger
  * /stories/{id}:
  *   delete:
+ *     security:
+ *        - cookieAuth: []
  *     summary: Delete a story
  *     parameters:
  *       - in: path
@@ -267,7 +274,7 @@ router.put("/:id", async (req, res) => {
  *       500:
  *         description: Server error
  */
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   try {
     const db = getDB();
 
